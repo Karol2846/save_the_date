@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anna & Karol · Save the Date</title>
+  <meta name="description" content="Zarezerwujcie datę – 12 czerwca 2027">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Pinyon+Script&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ====== Kolory sekcji – tło strony płynnie przechodzi między nimi ====== */
+    :root {
+      --bg: #f6f0e8;
+      --ink: #3b3430;
+      --accent: #a8876a;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --script: "Pinyon Script", cursive;
+      --sans: "Jost", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      transition: background-color 1.2s ease, color 1.2s ease;
+      overflow-x: hidden;
+    }
+
+    section {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.25rem;
+      position: relative;
+    }
+
+    /* ====== HERO ====== */
+    .eyebrow {
+      font-size: .8rem;
+      letter-spacing: .45em;
+      text-transform: uppercase;
+      color: var(--accent);
+      transition: color 1.2s ease;
+    }
+    .names {
+      font-family: var(--script);
+      font-size: clamp(3rem, 11vw, 7.5rem);
+      line-height: 1.1;
+      margin: 1.5rem 0 .5rem;
+      font-weight: 400;
+    }
+    .names .amp { color: var(--accent); padding: 0 .15em; }
+    .date {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(4rem, 19vw, 12rem);
+      line-height: 1;
+      letter-spacing: .04em;
+      display: flex;
+      align-items: center;
+      gap: .25em;
+    }
+    .date .dot {
+      width: .12em; height: .12em; border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+    .place-small {
+      margin-top: 1.5rem;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+    }
+    .scroll-hint {
+      color: inherit;
+      text-decoration: none;
+      position: absolute;
+      bottom: 2rem;
+      font-size: .7rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      opacity: .6;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    .scroll-hint::after {
+      content: "";
+      display: block;
+      width: 1px; height: 40px;
+      margin: .8rem auto 0;
+      background: currentColor;
+    }
+    @keyframes bob { 50% { transform: translateY(8px); } }
+
+    /* ====== Wspólne ====== */
+    h2 {
+      font-family: var(--script);
+      font-weight: 400;
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      margin-bottom: 1.5rem;
+    }
+    .lead {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 3vw, 1.7rem);
+      max-width: 36rem;
+      line-height: 1.5;
+    }
+    .divider {
+      width: 60px; height: 1px;
+      background: currentColor;
+      opacity: .4;
+      margin: 2.5rem auto;
+    }
+
+    /* ====== Odliczanie ====== */
+    .countdown {
+      display: flex;
+      gap: clamp(1rem, 5vw, 3.5rem);
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .countdown div { min-width: 4.5rem; }
+    .countdown strong {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown span {
+      font-size: .7rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      opacity: .7;
+    }
+
+    /* ====== Szczegóły ====== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+      width: 100%;
+      max-width: 60rem;
+      margin-top: 1rem;
+    }
+    .card {
+      border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+      padding: 2.25rem 1.5rem;
+      border-radius: 2px;
+      backdrop-filter: blur(2px);
+    }
+    .card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      opacity: .8;
+    }
+    .card h3 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.5rem;
+      margin-bottom: .6rem;
+    }
+    .card p { line-height: 1.7; font-size: .95rem; opacity: .85; }
+    .card .time {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      display: block;
+      margin-bottom: .4rem;
+    }
+
+    /* ====== Finał ====== */
+    .final .names { font-size: clamp(2.5rem, 8vw, 5rem); }
+    .btn {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 1rem 2.4rem;
+      border: 1px solid currentColor;
+      color: inherit;
+      text-decoration: none;
+      font-size: .75rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      transition: background .3s, color .3s;
+    }
+    .btn:hover { background: var(--ink); color: var(--bg); }
+
+    footer {
+      padding: 2rem 1rem 3rem;
+      text-align: center;
+      font-size: .75rem;
+      letter-spacing: .2em;
+      opacity: .5;
+    }
+
+    /* ====== Animacja pojawiania się przy scrollu ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: .15s; }
+    .reveal.d2 { transition-delay: .3s; }
+    .reveal.d3 { transition-delay: .45s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HERO: wielka data + imiona -->
+  <section data-bg="#f6f0e8" data-ink="#3b3430" data-accent="#a8876a">
+    <p class="eyebrow reveal">Save the date</p>
+    <h1 class="names reveal d1">Anna <span class="amp">&</span> Karol</h1>
+    <div class="date reveal d2" aria-label="12 czerwca 2027">
+      <span>12</span><i class="dot"></i><span>06</span><i class="dot"></i><span>27</span>
+    </div>
+    <p class="place-small reveal d3">Kraków</p>
+    <a href="#o-nas" class="scroll-hint">przewiń</a>
+  </section>
+
+  <!-- 2. Zapowiedź + odliczanie -->
+  <section id="o-nas" data-bg="#dfe5da" data-ink="#2f3b33" data-accent="#6f8a74">
+    <h2 class="reveal">Bierzemy ślub!</h2>
+    <p class="lead reveal d1">
+      Z radością chcemy Wam przekazać, że postanowiliśmy powiedzieć sobie „tak”.
+      Zarezerwujcie ten dzień w kalendarzu — oficjalne zaproszenie przyjdzie wkrótce.
+    </p>
+    <div class="divider reveal d2"></div>
+    <div class="countdown reveal d3" id="countdown">
+      <div><strong data-unit="days">000</strong><span>dni</span></div>
+      <div><strong data-unit="hours">00</strong><span>godzin</span></div>
+      <div><strong data-unit="minutes">00</strong><span>minut</span></div>
+      <div><strong data-unit="seconds">00</strong><span>sekund</span></div>
+    </div>
+  </section>
+
+  <!-- 3. Szczegóły -->
+  <section data-bg="#efdcd5" data-ink="#4a2f2c" data-accent="#b0766b">
+    <h2 class="reveal">Szczegóły</h2>
+    <div class="cards">
+      <article class="card reveal d1">
+        <div class="icon">⛪</div>
+        <span class="time">15:00</span>
+        <h3>Ceremonia</h3>
+        <p>Kościół św. Anny<br>ul. Przykładowa 1, Kraków</p>
+      </article>
+      <article class="card reveal d2">
+        <div class="icon">🥂</div>
+        <span class="time">17:00</span>
+        <h3>Przyjęcie</h3>
+        <p>Dwór pod Lipami<br>ul. Ogrodowa 12, Zabierzów</p>
+      </article>
+      <article class="card reveal d3">
+        <div class="icon">✉️</div>
+        <span class="time">do 01.03</span>
+        <h3>Potwierdzenie</h3>
+        <p>Prosimy o potwierdzenie obecności do 1 marca 2027</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4. Finał -->
+  <section class="final" data-bg="#23283a" data-ink="#f3ede4" data-accent="#d4b98c">
+    <p class="eyebrow reveal">Do zobaczenia</p>
+    <p class="names reveal d1">Anna <span class="amp">&</span> Karol</p>
+    <p class="lead reveal d2">Nie możemy się doczekać, by świętować ten dzień razem z Wami.</p>
+    <a class="btn reveal d3" id="calendar-btn" href="#">Dodaj do kalendarza</a>
+  </section>
+
+  <footer>12 · 06 · 2027</footer>
+
+  <script>
+    // ====== KONFIGURACJA – zmień na swoje dane ======
+    const WEDDING = {
+      date: new Date("2027-06-12T15:00:00+02:00"),
+      title: "Ślub Anny i Karola",
+      location: "Kraków",
+    };
+
+    // ---- Zmiana tła przy scrollu ----
+    const root = document.documentElement;
+    const sections = document.querySelectorAll("section[data-bg]");
+    const bgObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const s = e.target.dataset;
+        root.style.setProperty("--bg", s.bg);
+        root.style.setProperty("--ink", s.ink);
+        root.style.setProperty("--accent", s.accent);
+      });
+    }, { rootMargin: "-50% 0px -50% 0px" }); // sekcja na środku ekranu decyduje o kolorze
+    sections.forEach((s) => bgObserver.observe(s));
+
+    // ---- Pojawianie się elementów ----
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+    // ---- Odliczanie ----
+    const units = {};
+    document.querySelectorAll("[data-unit]").forEach((el) => (units[el.dataset.unit] = el));
+    function tick() {
+      const diff = Math.max(0, WEDDING.date - Date.now());
+      const d = Math.floor(diff / 864e5);
+      const h = Math.floor(diff / 36e5) % 24;
+      const m = Math.floor(diff / 6e4) % 60;
+      const s = Math.floor(diff / 1e3) % 60;
+      units.days.textContent = d;
+      units.hours.textContent = String(h).padStart(2, "0");
+      units.minutes.textContent = String(m).padStart(2, "0");
+      units.seconds.textContent = String(s).padStart(2, "0");
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // ---- Link do Google Calendar ----
+    const fmt = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    const end = new Date(WEDDING.date.getTime() + 12 * 36e5);
+    document.getElementById("calendar-btn").href =
+      "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+      "&text=" + encodeURIComponent(WEDDING.title) +
+      "&dates=" + fmt(WEDDING.date) + "/" + fmt(end) +
+      "&location=" + encodeURIComponent(WEDDING.location);
+    document.getElementById("calendar-btn").target = "_blank";
+  </script>
+</body>
+</html>
